@@ -1,0 +1,105 @@
+[
+  {
+    "id": "1",
+    "name": "KLH Admin",
+    "email": "klhAdmin@gmail.com",
+    "password": "$2b$10$hijW2LR.zhFEKq.i6pbD..9EY/FtSYo0ClnqEupxUwgaceNA8pu7y",
+    "role": "admin"
+  },
+  {
+    "id": "2",
+    "name": "Student",
+    "email": "Student@gmail.com",
+    "password": "$2b$10$HBCH41OCo8UZSD34yqEEy.aCedlXw.zcCzVbltWt9G3dMsgXfwN2i",
+    "role": "student",
+    "studentId": "ST-1001"
+  },
+  {
+    "id": "1778469374241",
+    "name": "student",
+    "email": "student@school.com",
+    "password": "$2b$10$VPagoJYAT2Sr2WqoJYLJSeyPb/QaxdmCRsnhOTVEjk7M6vnLNRxYK",
+    "role": "student",
+    "studentId": "ST-3140"
+  },
+  {
+    "id": "1778650474570",
+    "name": "dragonas",
+    "email": "dragonas@school.com",
+    "password": "$2b$10$GC8VqP/wc7BIhNZDFszO6OdCMctmGOVytZ9a8Nyz14hJChxQjItVu",
+    "role": "student",
+    "studentId": "dragonas"
+  },
+  {
+    "id": "1778650600024",
+    "name": "2520030125",
+    "email": "2520030125@school.com",
+    "password": "$2b$10$sr9qj3KxBKLY.Wy3DWKQXeIncYgfAOxVFouX7vO3CuE6iSkSNzJMK",
+    "role": "student",
+    "studentId": "2520030125"
+  },
+  {
+    "id": "1778650681046",
+    "name": "2520030125",
+    "email": "2520030125@gmail.com",
+    "password": "$2b$10$qHTsa/UAWPeqBAajMjMcE.596gT.v0l864IwvrLqnNNHreQxetNdq",
+    "role": "student",
+    "studentId": "2520030125"
+  },
+  {
+    "id": "1778650695129",
+    "name": "dragonas",
+    "email": "dragonas@gmail.com",
+    "password": "$2b$10$keAKyCuOmEv6vXffMkbEU.aYYkvFHyMk3gS8LhgeDsL7J3laQuvpe",
+    "role": "student",
+    "studentId": "dragonas"
+  },
+  {
+    "id": "1778651132387",
+    "name": "klhAstudnet",
+    "email": "klhAstudnet@gmail.com",
+    "password": "$2b$10$rx7cRV9Q14cBkJycjQLT5.2F/W0jqHEGOMNQ9Ltb8ZpsHSOf6nMKi",
+    "role": "student",
+    "studentId": "klhAstudnet"
+  },
+  {
+    "id": "1778651229296",
+    "name": "2520030393",
+    "email": "2520030393@gmail.com",
+    "password": "$2b$10$XgjmUP.5PEV71Ev0na6NJ.AK8zeuGf/GC2H0N.yP.7qq9Be3ySQhu",
+    "role": "student",
+    "studentId": "2520030393"
+  },
+  {
+    "id": "1778651245922",
+    "name": "2520030393",
+    "email": "2520030393@school.com",
+    "password": "$2b$10$gaX2nZYyZQ3lXUcryR8a.OGYeeLCYeMeNNO/r5qPY2LzRpW3H6lqm",
+    "role": "student",
+    "studentId": "2520030393"
+  },
+  {
+    "id": "1779550141408",
+    "name": "2520040100",
+    "email": "2520040100@school.com",
+    "password": "$2b$10$cTK6DJm01U.FTBJQm4YNee7vwY2MJ8hXSOQeDIEgUYEBadJTqJzPa",
+    "role": "student",
+    "studentId": "2520040100"
+  },
+  {
+    "id": "1780731446296",
+    "name": "2520030132",
+    "email": "2520030132@school.com",
+    "password": "$2b$10$J99cfaGB0y1iRhPK54mC4.XRdo4Whx4zAtzA5Nh4BZqMqN3zv/OY6",
+    "role": "student",
+    "studentId": "2520030132"
+  },
+  {
+    "id": "1781272756501p5yaq",
+    "name": "2520040992",
+    "email": "2520040992@school.com",
+    "password": "$2b$10$GU.iOsVwbOlMjhxd1mHVm.9V/24AaLAgTxjya4uh6MZyy27yXnGWa",
+    "role": "student",
+    "studentId": "2520040992"
+  }
+]

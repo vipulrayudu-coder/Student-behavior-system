@@ -1,0 +1,1188 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Report Incident - Incident Management System</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#3755c3",
+                        "background": "#f7f9fb",
+                        "surface-dim": "#d8dadc",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface-variant": "#444653",
+                        "primary-container": "#1e40af",
+                        "on-secondary-fixed": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#872d00",
+                        "on-tertiary-fixed-variant": "#802a00",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-container-high": "#e6e8ea",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffa583",
+                        "on-secondary-container": "#54647a",
+                        "surface-container": "#eceef0",
+                        "on-primary-fixed-variant": "#173bab",
+                        "on-background": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-primary-fixed": "#001453",
+                        "tertiary": "#611e00",
+                        "tertiary-fixed": "#ffdbce",
+                        "surface": "#f7f9fb",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#dde1ff",
+                        "outline": "#757684",
+                        "on-surface": "#191c1e",
+                        "inverse-primary": "#b8c4ff",
+                        "secondary-container": "#d0e1fb",
+                        "secondary": "#505f76",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary": "#00288e",
+                        "tertiary-fixed-dim": "#ffb59a",
+                        "outline-variant": "#c4c5d5",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-primary-container": "#a8b8ff",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed": "#380d00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "margin": "40px",
+                        "base": "4px",
+                        "gutter": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Inter"],
+                        "h1": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h3": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "600" }],
+                        "h2": ["30px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h1": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .time-box-selected {
+            background-color: #00288e !important;
+            color: white !important;
+            box-shadow: 0 0 15px rgba(0, 40, 142, 0.4);
+        }
+
+        /* Sidebar transition styles */
+        #sidebar {
+            transition: width 0.3s ease;
+        }
+
+        #main-content {
+            transition: margin-left 0.3s ease;
+        }
+
+        #top-nav {
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+
+        .sidebar-label {
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .collapsed-sidebar {
+            width: 4.5rem !important;
+        }
+
+        .collapsed-main {
+            margin-left: 4.5rem !important;
+        }
+
+        .collapsed-header {
+            margin-left: 4.5rem !important;
+            width: calc(100% - 4.5rem) !important;
+        }
+
+        .collapsed-label {
+            opacity: 0;
+            visibility: hidden;
+            width: 0;
+            display: none;
+        }
+
+        /* Smoother Animations */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .animate-slide-up {
+            animation: slideInUp 0.5s ease forwards;
+        }
+
+        /* Submission Overlay */
+        #loadingOverlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #loadingOverlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #3b82f6;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay">
+        <div class="flex flex-col items-center gap-4 bg-white p-8 rounded-2xl shadow-2xl">
+            <div class="spinner"></div>
+            <div class="text-center">
+                <h2 class="text-xl font-bold text-slate-800">Processing Incident Report</h2>
+                <p class="text-slate-500">Please wait while we sync with the server...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SideNavBar -->
+    <aside
+        class="h-screen w-60 border-r fixed left-0 top-0 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 z-50 overflow-hidden"
+        id="sidebar">
+        <div class="flex flex-col h-full py-4 space-y-1">
+            <div class="px-5 mb-8 flex items-center justify-between h-14">
+                <span class="text-lg font-bold text-blue-800 dark:text-blue-400 sidebar-label truncate"
+                    id="brand-label">Incident Manager</span>
+                <button
+                    class="flex items-center justify-center p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+                    id="toggle-sidebar">
+                    <span class="material-symbols-outlined" data-icon="menu">menu</span>
+                </button>
+            </div>
+            <nav class="flex-1 px-3 space-y-1">
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold group"
+                    href="Dashboard.html">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0"
+                        data-icon="dashboard">dashboard</span>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold"
+                    href="Incident report.html">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0"
+                        data-icon="report_problem">report_problem</span>
+                    <span class="sidebar-label">Incident Reports</span>
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold"
+                    href="Incident history.html">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0" data-icon="history">history</span>
+                    <span class="sidebar-label">History</span>
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0" data-icon="bolt">bolt</span>
+                    <span class="sidebar-label">Action Center</span>
+                </a>
+                <div class="pt-4 pb-2 px-4 sidebar-label">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Management</span>
+                </div>
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold"
+                    href="Admin panel.html">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0"
+                        data-icon="admin_panel_settings">admin_panel_settings</span>
+                    <span class="sidebar-label">Admin Panel</span>
+                </a>
+                <a class="text-slate-600 dark:text-slate-400 px-4 py-2.5 flex items-center gap-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-100 transition-all duration-200 ease-in-out font-sans text-sm font-semibold"
+                    href="#">
+                    <span class="material-symbols-outlined text-[20px] flex-shrink-0"
+                        data-icon="settings">settings</span>
+                    <span class="sidebar-label">Settings</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <!-- TopNavBar -->
+    <header
+        class="flex justify-between items-center h-14 px-8 sticky top-0 z-40 bg-white/80 backdrop-blur-md dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 ml-60 w-[calc(100%-15rem)]"
+        id="top-nav">
+        <div class="flex items-center gap-6">
+            <div class="relative">
+                <span class="text-lg font-bold text-blue-800 dark:text-blue-400 font-['Inter'] tracking-tight">Incident
+                    Management System</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <button
+                class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:opacity-80 p-sm rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+            </button>
+            <button
+                class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer active:opacity-80 p-sm rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined" data-icon="apps">apps</span>
+            </button>
+            <div
+                class="h-8 w-8 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden flex items-center justify-center ml-2">
+                <span class="material-symbols-outlined text-on-surface-variant" data-icon="person">person</span>
+            </div>
+        </div>
+    </header>
+    <main class="ml-60 p-margin overflow-y-auto transition-all duration-300" id="main-content">
+        <div class="max-w-[1200px] mx-auto">
+            <div class="mb-xl">
+                <h1 class="font-h1 text-h1 text-on-surface mb-sm">Report Incident</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant">Complete this form to officially document
+                    an incident. Ensure all details are accurate and objective.</p>
+            </div>
+
+            <!-- WhatsApp Connection Status Banner -->
+            <div id="whatsappStatusBanner"
+                 class="flex items-center gap-3 px-md py-sm rounded-xl border text-sm font-medium mb-lg transition-all duration-500"
+                 style="display:none!important">
+                <span id="whatsappStatusDot"
+                      class="inline-block w-2.5 h-2.5 rounded-full animate-pulse flex-shrink-0"></span>
+                <span class="material-symbols-outlined text-[18px] flex-shrink-0" id="whatsappStatusIcon">chat</span>
+                <span id="whatsappStatusText">Checking WhatsApp status…</span>
+                <span id="whatsappStatusBadge"
+                      class="ml-auto text-xs px-2 py-0.5 rounded-full font-semibold"></span>
+            </div>
+
+            <form class="space-y-lg" id="incidentForm">
+                <section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-xl shadow-sm">
+                    <h3
+                        class="font-h3 text-h3 text-primary border-b border-surface-container-highest pb-md mb-lg flex items-center gap-sm">
+                        <span class="material-symbols-outlined" data-icon="person_search">person_search</span>
+                        Student Information
+                    </h3>
+                    <div class="grid grid-cols-12 gap-gutter">
+                        <div class="col-span-12 md:col-span-6">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="studentName">Student Full Name *</label>
+                            <input
+                                class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                id="studentName" placeholder="e.g., Jane Doe" type="text" />
+                        </div>
+                        <div class="col-span-12 md:col-span-3">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="studentId">Student ID *</label>
+                            <input
+                                class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                id="studentId" placeholder="e.g., ST123" type="text" required />
+                        </div>
+                        <div class="col-span-12 md:col-span-3">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="parentContact">Parent WhatsApp *</label>
+                            <input
+                                class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                id="parentContact" placeholder="e.g., +1234567890" type="text" required />
+                        </div>
+                        <div class="col-span-12 md:col-span-3">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="gradeLevel">Grade Level *</label>
+                            <div class="relative w-full" id="gradeLevelContainer">
+                                <button
+                                    class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all flex items-center justify-between hover:bg-surface-container cursor-pointer transition-all duration-200 hover:border-primary active:scale-[0.99] duration-200"
+                                    id="gradeLevelTrigger" type="button">
+                                    <span id="gradeLevelValue">Select Grade</span>
+                                    <span
+                                        class="material-symbols-outlined text-on-surface-variant transition-transform duration-300"
+                                        id="gradeLevelArrow">expand_more</span>
+                                </button>
+                                <div class="absolute z-[60] mt-1 w-full bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl hidden opacity-0 -translate-y-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] overflow-hidden"
+                                    id="gradeLevelOptions">
+                                    <div class="py-1 max-h-60 overflow-y-auto scrollbar-hide">
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="LKG" type="button">LKG</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="UKG" type="button">UKG</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="1" type="button">Grade 1</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="2" type="button">Grade 2</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="3" type="button">Grade 3</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="4" type="button">Grade 4</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="5" type="button">Grade 5</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="6" type="button">Grade 6</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="7" type="button">Grade 7</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="8" type="button">Grade 8</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="9" type="button">Grade 9</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="10" type="button">Grade 10</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="Inter-1" type="button">Inter 1st Year</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="Inter-2" type="button">Inter 2nd Year</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="BTech-1" type="button">B.Tech 1st Year</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="BTech-2" type="button">B.Tech 2nd Year</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="BTech-3" type="button">B.Tech 3rd Year</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-all duration-200 ease-in-out cursor-pointer"
+                                            data-value="BTech-4" type="button">B.Tech 4th Year</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="bg-surface-container-lowest rounded-xl border border-outline-variant p-xl shadow-sm">
+                    <h3
+                        class="font-h3 text-h3 text-primary border-b border-surface-container-highest pb-md mb-lg flex items-center gap-sm">
+                        <span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+                        Incident Details
+                    </h3>
+                    <div class="grid grid-cols-12 gap-gutter">
+                        <div class="col-span-12 md:col-span-6">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="incidentType">Incident Type *</label>
+                            <div class="relative w-full" id="incidentTypeContainer">
+                                <button
+                                    class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all flex items-center justify-between hover:bg-surface-container cursor-pointer group duration-300"
+                                    id="incidentTypeTrigger" type="button">
+                                    <span class="text-on-surface-variant" id="incidentTypeValue">Select Category</span>
+                                    <span
+                                        class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 group-hover:scale-110"
+                                        id="incidentTypeArrow">expand_more</span>
+                                </button>
+                                <input id="incidentTypeHiddenInput" name="incidentType" type="hidden" value="" />
+                                <div class="absolute z-50 mt-2 w-full bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl hidden opacity-0 -translate-y-2 transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] overflow-hidden"
+                                    id="incidentTypeOptions">
+                                    <div class="py-1">
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-all duration-200 ease-in-out active:scale-[0.98]"
+                                            data-value="behavioral" type="button">Behavioral Misconduct</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-all duration-200 ease-in-out active:scale-[0.98]"
+                                            data-value="academic" type="button">Academic Integrity</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-all duration-200 ease-in-out active:scale-[0.98]"
+                                            data-value="safety" type="button">Safety Violation</button>
+                                        <button
+                                            class="w-full text-left px-md py-sm font-body-md text-on-surface hover:bg-surface-container-high hover:text-primary transition-all duration-200 ease-in-out active:scale-[0.98]"
+                                            data-value="attendance" type="button">Truancy/Attendance</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12 md:col-span-6">
+                            <div class="gap-md">
+                                <div>
+                                    <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                        for="incidentDate">Date &amp; Time *</label>
+                                    <div class="relative">
+                                        <input
+                                            class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all cursor-pointer"
+                                            id="incidentDate" placeholder="Select Date &amp; Time *" readonly=""
+                                            type="text" value="" />
+                                        <div
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+                                            <span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                                        </div>
+                                        <div class="absolute z-50 mt-1 p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl hidden w-fit"
+                                            id="datePickerPopover">
+                                            <div class="flex flex-col gap-3">
+                                                <div class="flex flex-row gap-4 min-w-[420px]">
+                                                    <!-- Calendar Section -->
+                                                    <div class="flex-1">
+                                                        <div class="flex items-center justify-between mb-4 px-1">
+                                                            <div class="flex items-center justify-between w-full">
+                                                                <button
+                                                                    class="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors text-slate-500"
+                                                                    id="prevMonth" type="button">
+                                                                    <span
+                                                                        class="material-symbols-outlined text-[20px]">chevron_left</span>
+                                                                </button>
+                                                                <div class="flex gap-1">
+                                                                    <div class="relative inline-block"
+                                                                        id="customMonthSelector">
+                                                                        <button
+                                                                            class="flex items-center gap-1 p-1 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors focus:outline-none"
+                                                                            id="monthDisplayBtn" type="button">
+                                                                            <span id="currentMonthText">October</span>
+                                                                            <span
+                                                                                class="material-symbols-outlined text-[18px] transition-transform duration-200"
+                                                                                id="monthArrow">expand_more</span>
+                                                                        </button>
+                                                                        <div class="absolute left-0 mt-1 w-32 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-[60] hidden opacity-0 transform -translate-y-2 transition-all duration-200 ease-out"
+                                                                            id="monthDropdown">
+                                                                            <div
+                                                                                class="py-1 max-h-48 overflow-y-auto scrollbar-hide">
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="January"
+                                                                                    type="button">January</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="February"
+                                                                                    type="button">February</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="March"
+                                                                                    type="button">March</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="April"
+                                                                                    type="button">April</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="May"
+                                                                                    type="button">May</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="June"
+                                                                                    type="button">June</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="July"
+                                                                                    type="button">July</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="August"
+                                                                                    type="button">August</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="September"
+                                                                                    type="button">September</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors bg-blue-50/50"
+                                                                                    data-month="October"
+                                                                                    type="button">October</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="November"
+                                                                                    type="button">November</button>
+                                                                                <button
+                                                                                    class="w-full text-left px-3 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 hover:text-primary transition-colors"
+                                                                                    data-month="December"
+                                                                                    type="button">December</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="relative inline-block"
+                                                                        id="customYearSelector">
+                                                                        <button
+                                                                            class="flex items-center gap-1 p-1 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors focus:outline-none"
+                                                                            id="yearDisplayBtn" type="button">
+                                                                            <span id="currentYearText">2024</span>
+                                                                            <span
+                                                                                class="material-symbols-outlined text-[18px] transition-transform duration-200"
+                                                                                id="yearArrow">expand_more</span>
+                                                                        </button>
+                                                                        <div class="absolute left-0 mt-1 w-24 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-[60] hidden opacity-0 transform -translate-y-2 transition-all duration-200 ease-out"
+                                                                            id="yearDropdown">
+                                                                            <div class="py-1 max-h-48 overflow-y-auto scrollbar-hide"
+                                                                                id="yearOptionsContainer"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <button
+                                                                    class="p-1 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors text-slate-500"
+                                                                    id="nextMonth" type="button">
+                                                                    <span
+                                                                        class="material-symbols-outlined text-[20px]">chevron_right</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="grid grid-cols-7 mb-1">
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Su</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Mo</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Tu</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">We</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Th</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Fr</span>
+                                                            <span
+                                                                class="h-8 flex items-center justify-center text-[11px] font-bold text-slate-400 uppercase">Sa</span>
+                                                        </div>
+                                                        <div class="grid grid-cols-7 gap-y-1" id="calendarDaysGrid">
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-300"
+                                                                type="button">29</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-300"
+                                                                type="button">30</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">1</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">2</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">3</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">4</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">5</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">6</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">7</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">8</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">9</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">10</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">11</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">12</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">13</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">14</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">15</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">16</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">17</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">18</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">19</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">20</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">21</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">22</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">23</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">24</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">25</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">26</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">27</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">28</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">29</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">30</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-700 dark:text-slate-200 hover:bg-primary-fixed/30 rounded-full transition-all calendar-day"
+                                                                type="button">31</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-300"
+                                                                type="button">1</button>
+                                                            <button
+                                                                class="h-8 w-8 flex items-center justify-center text-sm text-slate-300"
+                                                                type="button">2</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Time Selection Section -->
+                                                    <div
+                                                        class="w-32 border-l border-slate-100 dark:border-slate-700 pl-3 flex flex-col">
+                                                        <div class="mb-4 pt-1">
+                                                            <span
+                                                                class="text-[10px] font-bold text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                                                <span
+                                                                    class="material-symbols-outlined text-[16px]">schedule</span>
+                                                                Set Time
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-1">
+                                                            <div
+                                                                class="flex items-center justify-center rounded-lg border border-slate-100 dark:border-slate-700 h-64 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
+                                                                <!-- Selection Overlay -->
+                                                                <div
+                                                                    class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-8 bg-primary/5 pointer-events-none border-y border-primary/10">
+                                                                </div>
+                                                                <!-- Hours Column -->
+                                                                <div class="flex-1 h-full overflow-y-auto scrollbar-hide snap-y snap-mandatory text-center"
+                                                                    id="hourScroll">
+                                                                    <div class="space-y-1 px-1">
+                                                                        <script>
+                                                                            for (let i = 0; i < 24; i++) {
+                                                                                const val = i.toString().padStart(2, '0');
+                                                                                document.write(`<div class="snap-center h-8 flex items-center justify-center text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer rounded transition-all time-select-item" onclick="document.querySelectorAll('#hourScroll .time-select-item').forEach(el => el.classList.remove('time-box-selected')); this.classList.add('time-box-selected')">${val}</div>`);
+                                                                            }
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Separator -->
+                                                                <div class="text-slate-300 font-bold">:</div>
+                                                                <!-- Minutes Column -->
+                                                                <div class="flex-1 h-full overflow-y-auto scrollbar-hide snap-y snap-mandatory text-center"
+                                                                    id="minuteScroll">
+                                                                    <div class="space-y-1 px-1">
+                                                                        <script>
+                                                                            for (let i = 0; i < 60; i++) {
+                                                                                const val = i.toString().padStart(2, '0');
+                                                                                document.write(`<div class="snap-center h-8 flex items-center justify-center text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 cursor-pointer rounded transition-all time-select-item" onclick="document.querySelectorAll('#minuteScroll .time-select-item').forEach(el => el.classList.remove('time-box-selected')); this.classList.add('time-box-selected')">${val}</div>`);
+                                                                            }
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="flex justify-start gap-2 pt-2 border-t border-slate-100 dark:border-slate-700 mt-2">
+                                                            <button
+                                                                class="text-xs font-bold text-white px-4 py-1.5 bg-primary hover:bg-primary-container rounded shadow-sm transition-all w-full"
+                                                                id="applyDatePicker" type="button">Apply</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-span-12">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="incidentLocation">Specific Location *</label>
+                            <input
+                                class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                                id="incidentLocation" placeholder="e.g., North Wing Hallway, Cafeteria" type="text" />
+                        </div>
+                    </div>
+                </section>
+                <!-- Narrative and Rating Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+                    <section
+                        class="bg-surface-container-lowest rounded-xl border border-outline-variant p-xl shadow-sm h-full flex flex-col">
+                        <h3
+                            class="font-h3 text-h3 text-primary border-b border-surface-container-highest pb-md mb-lg flex items-center gap-sm">
+                            <span class="material-symbols-outlined" data-icon="description">description</span>
+                            Narrative Description
+                        </h3>
+                        <div class="flex-1">
+                            <label class="block font-label-md text-label-md text-on-surface-variant mb-sm"
+                                for="narrative">Detailed Account of Events *</label>
+                            <textarea
+                                class="w-full bg-surface border border-outline-variant rounded-lg px-md py-sm font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-y min-h-[260px]"
+                                id="narrative"
+                                placeholder="Provide a factual, objective description of the incident. Include who was involved, what occurred, and any immediate actions taken."
+                                rows="8"></textarea>
+                            <p class="font-body-sm text-body-sm text-on-surface-variant mt-sm text-right">0 / 2000
+                                characters</p>
+                        </div>
+                    </section>
+                    <div class="space-y-lg flex flex-col">
+                        <section
+                            class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm p-lg">
+                            <h3
+                                class="font-h3 text-h3 text-primary border-b border-surface-container-highest pb-md mb-lg flex items-center gap-sm">
+                                <span class="material-symbols-outlined" data-icon="warning">warning</span>
+                                Severity Rating
+                            </h3>
+                            <div class="flex gap-md"><label class="flex-1 cursor-pointer">
+                                    <input class="peer sr-only" name="severity" type="radio" value="low" />
+                                    <div
+                                        class="rounded-lg border border-outline-variant text-center bg-surface hover:bg-surface-container transition-all peer-checked:border-green-500 peer-checked:bg-green-100 peer-checked:text-green-900 p-sm">
+                                        <span class="block font-label-md text-label-md mb-xs">Low</span>
+                                        <span
+                                            class="font-body-sm text-body-sm text-on-surface-variant peer-checked:text-green-800">Minor
+                                            infraction</span>
+                                    </div>
+                                </label>
+                                <label class="flex-1 cursor-pointer">
+                                    <input class="peer sr-only" name="severity" type="radio" value="medium" />
+                                    <div
+                                        class="rounded-lg border border-outline-variant text-center bg-surface hover:bg-surface-container transition-all peer-checked:border-yellow-500 peer-checked:bg-yellow-100 peer-checked:text-yellow-900 p-sm">
+                                        <span class="block font-label-md text-label-md mb-xs">Medium</span>
+                                        <span
+                                            class="font-body-sm text-body-sm text-on-surface-variant peer-checked:text-yellow-800">Disruptive
+                                            behavior</span>
+                                    </div>
+                                </label>
+                                <label class="flex-1 cursor-pointer">
+                                    <input class="peer sr-only" name="severity" type="radio" value="high" />
+                                    <div
+                                        class="rounded-lg border border-outline-variant text-center bg-surface hover:bg-surface-container transition-all peer-checked:border-red-500 peer-checked:bg-red-100 peer-checked:text-red-900 p-sm">
+                                        <span class="block font-label-md text-label-md mb-xs">High</span>
+                                        <span
+                                            class="font-body-sm text-body-sm text-on-surface-variant peer-checked:text-red-800">Severe/Safety
+                                            risk</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+                        <section
+                            class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex-1 p-lg">
+                            <h3
+                                class="font-h3 text-h3 text-primary border-b border-surface-container-highest pb-md mb-lg flex items-center gap-sm">
+                                <span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+                                Required Actions
+                            </h3>
+                            <div class="">
+                                <label
+                                    class="flex items-center justify-between border border-outline-variant rounded-lg bg-surface cursor-pointer hover:bg-surface-container transition-colors p-sm">
+                                    <div>
+                                        <span class="block font-label-md text-label-md text-on-surface">Parent/Guardian
+                                            Notification</span>
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant">Mandatory for
+                                            High severity</span>
+                                    </div>
+                                    <div class="relative inline-flex items-center">
+                                        <input class="sr-only peer" type="checkbox" />
+                                        <div
+                                            class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </div>
+                                </label>
+                                <label
+                                    class="flex items-center justify-between border border-outline-variant rounded-lg bg-surface cursor-pointer hover:bg-surface-container transition-colors p-sm interactive-selected">
+                                    <div>
+                                        <span class="block font-label-md text-label-md text-on-surface">Counsellor
+                                            Referral</span>
+                                        <span class="font-body-sm text-body-sm text-on-surface-variant">Flag for support
+                                            services</span>
+                                    </div>
+                                    <div class="relative inline-flex items-center">
+                                        <input checked="checked" class="sr-only peer" type="checkbox" />
+                                        <div
+                                            class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-md pt-lg border-t border-surface-container-highest relative">
+                    <button
+                        id="cancelReportBtn"
+                        class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-surface border border-outline hover:bg-surface-container-highest focus:ring-2 focus:ring-primary focus:outline-none transition-colors"
+                        type="button"
+                        onclick="window.location.href = state.user.role === 'student' ? 'student-portal.html' : 'Incident history.html'">
+                        Cancel
+                    </button>
+                    <div class="hidden absolute bottom-full mb-4 right-0 w-80 bg-surface-container-lowest border border-primary/20 rounded-xl shadow-2xl p-md z-50 transform transition-all duration-300 ease-out animate-in fade-in slide-in-from-bottom-2"
+                        id="submitConfirmationOverlay">
+                        <div class="flex items-start gap-sm mb-sm">
+                            <span class="material-symbols-outlined text-primary fill text-[20px]">info</span>
+                            <h4 class="font-label-md text-label-md text-primary uppercase tracking-wider">Submission
+                                Process</h4>
+                        </div>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-md">
+                            Submitting this report will:
+                        </p>
+                        <ul class="space-y-sm">
+                            <li class="flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-[16px] text-green-600 font-bold">check_circle</span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Fetch student data from
+                                    ERP</span>
+                            </li>
+                            <li class="flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-[16px] text-green-600 font-bold">check_circle</span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Save incident to History</span>
+                            </li>
+                            <li class="flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-[16px] text-green-600 font-bold">check_circle</span>
+                                <span class="font-body-sm text-body-sm text-on-surface">Trigger automated WhatsApp to
+                                    parent</span>
+                            </li>
+                        </ul>
+                        <div class="mt-md pt-sm border-t border-surface-container-highest">
+                            <p class="text-[11px] font-medium text-slate-400 italic font-['Inter']">
+                                Click 'Submit Report' to finalize documentation.
+                            </p>
+                        </div>
+                        <div
+                            class="absolute -bottom-2 right-12 w-4 h-4 bg-surface-container-lowest border-r border-b border-primary/20 rotate-45">
+                        </div>
+                    </div><button
+                        class="px-lg py-sm rounded-lg font-label-md text-label-md bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:outline-none transition-colors shadow-sm flex items-center gap-sm"
+                        id="submitReportBtn" type="submit">
+                        <span class="material-symbols-outlined text-[18px]" data-icon="send">send</span>
+                        Submit Report
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script>
+        // ======================================
+        // CORE STATE & CONFIG
+        // ======================================
+        const state = {
+            user: JSON.parse(localStorage.getItem('user')),
+            token: localStorage.getItem('token'),
+            selectedDate: null,
+            selectedGrade: null,
+            selectedType: null
+        };
+
+        // Auth Check
+        if (!state.user || (state.user.role !== 'admin' && state.user.role !== 'student')) {
+            window.location.href = 'login.html';
+        }
+
+        // Adjust UI based on role
+        document.addEventListener('DOMContentLoaded', () => {
+            if (state.user.role === 'student') {
+                // Pre-fill fields for student
+                const nameInput = document.getElementById('studentName');
+                const idInput = document.getElementById('studentId');
+                if(nameInput) nameInput.value = state.user.name;
+                if(idInput) {
+                    idInput.value = state.user.studentId;
+                    idInput.readOnly = true; // prevent changing to other students
+                    idInput.classList.add('bg-slate-100', 'text-slate-500');
+                }
+                
+                // Hide sidebar for students
+                const sidebar = document.getElementById('sidebar');
+                const topNav = document.getElementById('top-nav');
+                const mainContent = document.getElementById('main-content');
+                if(sidebar) sidebar.style.display = 'none';
+                if(topNav) {
+                    topNav.style.marginLeft = '0';
+                    topNav.style.width = '100%';
+                }
+                if(mainContent) mainContent.style.marginLeft = '0';
+            }
+        });
+
+        // ======================================
+        // DOM ELEMENTS
+        // ======================================
+        const els = {
+            form: document.querySelector('form'),
+            sidebar: document.getElementById('sidebar'),
+            toggleBtn: document.getElementById('toggle-sidebar'),
+            mainContent: document.getElementById('main-content'),
+            topNav: document.getElementById('top-nav'),
+            labels: document.querySelectorAll('.sidebar-label'),
+            gradeTrigger: document.getElementById('gradeLevelTrigger'),
+            gradeOptions: document.getElementById('gradeLevelOptions'),
+            gradeValue: document.getElementById('gradeLevelValue'),
+            typeTrigger: document.getElementById('incidentTypeTrigger'),
+            typeOptions: document.getElementById('incidentTypeOptions'),
+            typeValue: document.getElementById('incidentTypeValue'),
+            dateInput: document.getElementById('incidentDate'),
+            datePopover: document.getElementById('datePickerPopover'),
+            applyDateBtn: document.getElementById('applyDatePicker'),
+            loadingOverlay: document.getElementById('loadingOverlay'),
+            calendarGrid: document.getElementById('calendarDaysGrid'),
+            monthText: document.getElementById('currentMonthText'),
+            yearText: document.getElementById('currentYearText'),
+            prevMonth: document.getElementById('prevMonth'),
+            nextMonth: document.getElementById('nextMonth')
+        };
+
+        // ======================================
+        // INITIALIZATION
+        // ======================================
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSidebar();
+            setupDropdowns();
+            setupDatePicker();
+            setupForm();
+        });
+
+        // ======================================
+        // SIDEBAR
+        // ======================================
+        function setupSidebar() {
+            els.toggleBtn?.addEventListener('click', () => {
+                els.sidebar.classList.toggle('collapsed-sidebar');
+                els.mainContent?.classList.toggle('collapsed-main');
+                els.topNav?.classList.toggle('collapsed-header');
+                els.labels.forEach(l => l.classList.toggle('collapsed-label'));
+            });
+        }
+
+        // ======================================
+        // DROPDOWNS (Grade & Type)
+        // ======================================
+        function setupDropdowns() {
+            // Grade Dropdown
+            els.gradeTrigger?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllPopovers();
+                els.gradeOptions.classList.remove('hidden');
+                setTimeout(() => els.gradeOptions.classList.remove('opacity-0'), 10);
+            });
+
+            els.gradeOptions?.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    els.gradeValue.innerText = btn.innerText;
+                    state.selectedGrade = btn.dataset.value;
+                    els.gradeOptions.classList.add('hidden', 'opacity-0');
+                });
+            });
+
+            // Type Dropdown
+            els.typeTrigger?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllPopovers();
+                els.typeOptions.classList.remove('hidden');
+                setTimeout(() => els.typeOptions.classList.remove('opacity-0'), 10);
+            });
+
+            els.typeOptions?.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    els.typeValue.innerText = btn.innerText;
+                    state.selectedType = btn.dataset.value;
+                    els.typeOptions.classList.add('hidden', 'opacity-0');
+                });
+            });
+
+            document.addEventListener('click', closeAllPopovers);
+        }
+
+        function closeAllPopovers() {
+            els.gradeOptions?.classList.add('hidden', 'opacity-0');
+            els.typeOptions?.classList.add('hidden', 'opacity-0');
+            els.datePopover?.classList.add('hidden');
+        }
+
+        // ======================================
+        // DATE PICKER
+        // ======================================
+        function setupDatePicker() {
+            els.dateInput?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = els.datePopover.classList.contains('hidden');
+                closeAllPopovers();
+                if (isHidden) {
+                    els.datePopover.classList.remove('hidden');
+                }
+            });
+
+            els.datePopover?.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            els.calendarGrid?.addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day')) {
+                    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('bg-primary', 'text-white'));
+                    e.target.classList.add('bg-primary', 'text-white');
+                    els.calendarGrid.dataset.selectedDay = e.target.innerText;
+                }
+            });
+
+            els.applyDateBtn?.addEventListener('click', () => {
+                const day = els.calendarGrid.dataset.selectedDay || new Date().getDate();
+                const month = els.monthText.innerText;
+                const year = els.yearText.innerText;
+                const hour = document.querySelector('#hourScroll .time-box-selected')?.innerText || '09';
+                const minute = document.querySelector('#minuteScroll .time-box-selected')?.innerText || '00';
+                
+                els.dateInput.value = `${month} ${day}, ${year} ${hour}:${minute}`;
+                els.datePopover.classList.add('hidden');
+            });
+        }
+
+        // ======================================
+        // FORM SUBMISSION
+        // ======================================
+        function setupForm() {
+            els.form?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = {
+                    studentName: document.getElementById('studentName').value,
+                    studentId: document.getElementById('studentId').value,
+                    parentContact: document.getElementById('parentContact').value,
+                    grade: els.gradeValue.innerText,
+                    type: els.typeValue.innerText,
+                    location: document.getElementById('incidentLocation').value,
+                    description: document.getElementById('narrative').value,
+                    date: els.dateInput.value,
+                    severity: document.querySelector('input[name="severity"]:checked')?.value || 'low',
+                    reportedBy: state.user.name,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Validation
+                if (!formData.studentName || !formData.studentId || !formData.date || 
+                    formData.type === 'Select Category' || formData.grade === 'Select Grade') {
+                    alert('Please fill all required fields marked with *');
+                    return;
+                }
+
+                try {
+                    els.loadingOverlay.classList.add('active');
+
+                    const response = await fetch('/api/incidents', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${state.token}`
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (response.ok) {
+                        els.loadingOverlay.querySelector('h2').innerText = 'Report Submitted!';
+                        els.loadingOverlay.querySelector('p').innerText = 'Incident has been logged and parents notified.';
+                        
+                        setTimeout(() => {
+                            window.location.href = state.user.role === 'student' ? 'student-portal.html' : 'Incident history.html';
+                        }, 2000);
+                    } else {
+                        const errData = await response.json().catch(() => ({}));
+                        throw new Error(errData.message || 'Failed to submit report');
+                    }
+                } catch (err) {
+                    els.loadingOverlay.classList.remove('active');
+                    alert('Error submitting report. Please try again.');
+                    console.error(err);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

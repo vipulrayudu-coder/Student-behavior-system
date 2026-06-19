@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Critical Incident: Building 4 Entry Breach",
+    "message": "Unauthorized keycard access detected at East Gate entrance at 08:42 AM.",
+    "type": "critical",
+    "timestamp": "2026-05-11T03:17:10.298Z",
+    "read": true
+  },
+  {
+    "id": "2",
+    "title": "Parent Notification Pending",
+    "message": "Review draft for Case #4922 regarding student behavior report.",
+    "type": "info",
+    "timestamp": "2026-05-11T02:17:10.298Z",
+    "read": true
+  },
+  {
+    "id": "3",
+    "title": "New Counselor Feedback",
+    "message": "Dr. Aris Thorne added comments to the follow-up strategy for Incident #883.",
+    "type": "info",
+    "timestamp": "2026-05-11T01:17:10.299Z",
+    "read": true
+  }
+]
